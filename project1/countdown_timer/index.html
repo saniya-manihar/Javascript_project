@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: #61dafb;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .countdown {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .countdown h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .timer {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .timer div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #20232a;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .timer div span {
+            font-size: 2rem;
+        }
+
+        .timer div small {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #61dafb;
+        }
+
+        input[type="number"], button {
+            font-size: 1rem;
+            padding: 0.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 0.25rem;
+            background: #20232a;
+            color: #61dafb;
+        }
+
+        input[type="number"]::placeholder {
+            color: #61dafb;
+        }
+
+        button {
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #61dafb;
+            color: #20232a;
+        }
+
+        #timerdisplay, #message {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Countdown Timer</h1>
+    <input type="number" id="secondinput" placeholder="Enter seconds">
+    <button onclick="startcountdown()">Start</button>
+    <p id="timerdisplay"></p>
+    <p id="message"></p>
+    <script>
+        function startcountdown() {
+            const secondinput = document.getElementById("secondinput");
+            let time = parseInt(secondinput.value);
+            const timer = document.getElementById("timerdisplay");
+            const message = document.getElementById("message");
+
+            if (isNaN(time) || time <= 0) {
+                alert("Please enter a valid time");
+                return;
+            }
+
+            const countdown = setInterval(() => {
+                if (time <= 0) {
+                    clearInterval(countdown);
+                    timer.textContent = "Time's up!";
+                    message.textContent = "Congratulations! You've completed your countdown";
+                    return;
+                } else {
+                    timer.textContent = `${time} seconds remaining`;
+                    time--;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
